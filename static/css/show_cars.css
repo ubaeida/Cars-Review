@@ -1,0 +1,114 @@
+* {
+    box-sizing: border-box
+}
+body {
+   background-color: #edf3e9;
+   font-family: Arial, Tahoma;
+   text-align: center;
+}
+.bod{
+    width:800px;
+    height: auto;
+    margin-right:auto;
+    margin-left:auto;
+    text-align: center;
+}
+
+table, tr, td,th{
+    text-align: center;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+    margin-top: 50px;
+    margin:auto;
+}
+
+tr{
+    height :50px;
+}
+
+tr, td, th{
+    width: 100px;
+    text-align: center;
+}
+
+.father-butto{
+    width:800px;
+    text-align:center;
+    display: flex;
+    flex-direction: row;
+    float: center;
+}
+
+input[type="button"], .tit input[type="submit"] {
+	width: 75px;
+	height:50px;
+	clear: both;
+	margin:10px;
+	border-radius: 50px 20px;
+	border: 1px #ccc solid;
+	background-color: #eee;
+	font-size: 14px;
+	line-height: 50px;
+}
+.tit input[type="submit"] {
+    border-radius: 10px 10px;
+}
+.tit input[type="submit"]:hover {
+    border-radius: 15px 15px;
+    width:85px;
+    height:60px;
+
+}
+input[type="button"]:hover , button:hover{
+	background-color: #eee;
+	color: #000;
+	width:85px;
+	height:50px;
+}
+
+.tit-f{
+    font-size: 18px;
+    margin:5px;
+}
+.tit-i input[type="text"], .tit-i input[type="number"]{
+    width:200px;
+    border-radius: 10px 10px;
+    height:30px;
+    margin:5px;
+    font-size: 18px;
+    text-align:center;
+}
+
+.er {
+    font-size: 18px;
+    color: red;
+    margin:5px;
+}
+
+.detail input[type="button"] {
+    width: 110px;
+	height:25px;
+	clear: both;
+	border-radius: 10px 10px;
+	border: 1px #000 solid;
+	background-color: #eee;
+	font-size: 18px;
+}
+.rev input[type="submit"]{
+    width: 150x;
+	height:50px;
+	clear: both;
+	margin:10px;
+	border-radius: 10px 10px;
+	border: 1px #ccc solid;
+	background-color: #eee;
+	font-size: 16px;
+	line-height: 50px;
+}
+
+.rev input[type="submit"]:hover{
+	background-color: #eee;
+	color: #000;
+	width:170px;
+	height:60px;
+}

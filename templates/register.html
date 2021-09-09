@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+
+{% block content  %}
+
+    <form action="do_register" method="post" novalidate>
+        <h1>Register</h1>
+              {{ form.hidden_tag() }}
+            <div class="tit-f">
+                {{form.username.label}}
+            </div>
+            <div class="tit-i">
+                {{ form.username }}
+            </div>
+            <div class="tit-f">
+            {{form.password.label}}
+           </div>
+            <div class="tit-i">
+            {{ form.password }}
+           </div>
+        <div class="tit">
+            {{form.submit(value="Register") }}
+        </div>
+
+    </form>
+
+{% endblock %}

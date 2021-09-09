@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+    <form action="do_login" method="post" novalidate>
+        <h1>log in</h1>
+              {{ form.hidden_tag() }}
+        <div class="tit">
+            <div class="tit-f">
+            {{form.username.label}}
+            </div>
+            <div class="tit-i">
+            {{ form.username }}
+            </div>
+        </div>
+        <div class="tit">
+            <div class="tit-f">
+            {{form.password.label}}
+            </div>
+            <div class="tit-i">
+            {{ form.password }}
+            </div>
+        </div>
+        <div class="tit">
+            {{ form.submit(value="Login") }}
+        </div>
+        <div class="er">
+        {{ er }}
+        </div>
+    </form>
+
+{% endblock %}

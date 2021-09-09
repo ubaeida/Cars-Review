@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+
+{% block content  %}
+    <h1>{{ car.name }} Review</h1>
+    {% if reviews %}
+    <table>
+        <tr>
+            <th>User Id</th>
+            <th>Review</th>
+        </tr>
+
+
+        {% for review in reviews %}
+        <tr>
+            <td>{{ review.user_id}}</td>
+            <td>{{ review.review }}</td>
+        </tr>
+
+        {% endfor %}
+    </table>
+    {% else %}
+    <h2>No Reviews</h2>
+    {% endif %}
+
+    {% if session['ID'] %}
+    <h3>Insert your review about the car below, please!</h3>
+    <form method="post">
+        <input type="hidden" name='car_id' value="{{car.id}}">
+
+        <label for="my_review">Your Review</label>
+        <div class="tit-i">
+        <input id='my_review' name='review' type="number" min="1" max="100"/>
+        </div>
+        <div class="rev">
+        <input class="butt" type="submit"  value="Add your review">
+        </div>
+    </form>
+    {% else %}
+    <div class="er"> Login to add your review</div>
+    <input type="button" onclick="location.href='/login'" value="Login">
+{% endif %}
+{% endblock %}
