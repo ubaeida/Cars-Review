@@ -19,15 +19,15 @@
 # table for cars (id , car name, car model, year, image)
 # table for review (car_id, id_user, opinion box, rate of 10)
 
-from flask import *
-from flask_session import Session
-
-from servcies import user_service
-from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
-from wtforms.validators import data_required
 import os
+
+from flask import *
+
+from flask_session import Session
 from servcies import car_service
+from servcies import user_service
+from views.LoginForm import LoginForm
+from views.RegisterForm import RegisterForm
 
 user_service = user_service.UserService()
 
@@ -67,32 +67,21 @@ def post_review():
     return redirect(url_for('car_details', car_id=car_id))
 
 
-class LoginForm(FlaskForm):
-    username = StringField('username', validators=[data_required()])
-    password = StringField('password', validators=[data_required()])
-    submit = SubmitField('submit')
-
-
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login():
-    form = LoginForm()
-    return render_template("login.html", form=form, title="Log in")
-
-
-@app.route("/do_login", methods=['POST'])
-def do_login():
     form = LoginForm()
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
-    service_out = user_service.user_log_in(username, password)
-    if service_out is None:
-        flash('error login in')
-        er = "user name not found"
-        return render_template('login.html', form=form, er=er)
-    else:
-        session['ID'] = service_out.myid
-        return redirect(url_for('hello_world'))
+        service_out = user_service.user_log_in(username, password)
+        if service_out is None:
+            flash('error login in')
+            er = "user name not found"
+            return render_template('login-v2.html', form=form, er=er)
+        else:
+            session['ID'] = service_out.myid
+            return redirect(url_for('hello_world'))
+    return render_template("login-v2.html", form=form, title="Log in")
 
 
 @app.route('/logout')
@@ -101,20 +90,15 @@ def ses_end():
     return redirect(url_for('login'))
 
 
-@app.route("/register")
+@app.route("/register", methods=['GET', 'POST'])
 def register():
-    form = LoginForm()
-    return render_template("register.html", form=form, title="Registration")
-
-
-@app.route("/do_register", methods=['POST'])
-def do_register():
-    form = LoginForm()
+    form = RegisterForm()
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
-    user_service.register_user(username, password)
-    return redirect(url_for('login'))
+        user_service.register_user(username, password)
+        return redirect(url_for('login'))
+    return render_template("register-v2.html", form=form, title="Registration")
 
 
 if __name__ == "__main__":
