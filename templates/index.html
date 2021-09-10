@@ -14,7 +14,9 @@
             <input class="butto" type="button" onclick="location.href='/login'" value="Login">
     {% endif %}
             <input class="butto" type="button" onclick="location.href='/'" value="Home">
+    {% if session['ID'] %}
             <input class="butto" type="button" onclick="location.href='/logout'" value="Logout">
+    {% endif %}
         </div>
     {% block content %}
     <table>
