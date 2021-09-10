@@ -1,0 +1,11 @@
+{% macro render_field(field, name='', type='text', icon='',placeholder='') %}
+<div class="input-group mb-3">
+
+    {{ field(class_='form-control', placeholder=field.label.text) }}
+    <div class="input-group-append">
+        <div class="input-group-text">
+            <span class="fas {{icon}}"></span>
+        </div>
+    </div>
+</div>
+{% endmacro %}
