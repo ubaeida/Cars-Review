@@ -24,12 +24,13 @@ import os
 from flask import *
 
 from flask_session import Session
-from servcies import car_service
-from servcies import user_service
+from servcies.car_service import CarService
+from servcies.user_service import UserService
 from views.LoginForm import LoginForm
 from views.RegisterForm import RegisterForm
 
-user_service = user_service.UserService()
+user_service = UserService()
+car_service = CarService()
 
 
 class Config(object):
@@ -43,8 +44,8 @@ Session(app)
 
 
 @app.route("/")
-def hello_world():
-    cars = car_service.CarService().show_cars()
+def index():
+    cars = car_service.show_cars()
     return render_template("index.html", title="Welcome to show cars app", cars=cars)
 
 
@@ -54,17 +55,8 @@ def car_details(car_id):
         review = request.form.get('review')
         user_id = session['ID']
         user_service.add_review(user_id, car_id, review)
-    car, reviews = car_service.CarService().get_car_details1(car_id)
+    car, reviews = car_service.get_car_details(car_id)
     return render_template('car_details.html', title='Car details', car=car, reviews=reviews)
-
-
-@app.route("/post_review", methods=['POST'])
-def post_review():
-    car_id = request.form.get('car_id')
-    review = request.form.get('review')
-    user_id = session['ID']
-    user_service.add_review(car_id, user_id, review)
-    return redirect(url_for('car_details', car_id=car_id))
 
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -80,14 +72,14 @@ def login():
             return render_template('login-v2.html', form=form, er=er)
         else:
             session['ID'] = service_out.myid
-            return redirect(url_for('hello_world'))
+            return redirect(url_for('index'))
     return render_template("login-v2.html", form=form, title="Log in")
 
 
 @app.route('/logout')
 def ses_end():
     session.pop('ID', None)
-    return redirect(url_for('login'))
+    return redirect(url_for('index'))
 
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -96,7 +88,9 @@ def register():
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
-        user_service.register_user(username, password)
+        name = form.name.data
+        email = form.email.data
+        user_service.register_user(username, password, name, email)
         return redirect(url_for('login'))
     return render_template("register-v2.html", form=form, title="Registration")
 

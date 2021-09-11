@@ -28,6 +28,7 @@
                 {{form.errors}}
                 {{ form.csrf_token }}
                 {{ form.hidden_tag() }}
+                {{ render_field(form.name, icon='fa-user') }}
                 {{ render_field(form.username, icon='fa-user') }}
                 {{ render_field(form.email, icon='fa-envelope') }}
                 {{ render_field(form.password, icon='fa-lock') }}

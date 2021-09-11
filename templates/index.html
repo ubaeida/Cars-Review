@@ -1,53 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title> {{ title }} </title>
-    <link rel="stylesheet" href="static/css/show_cars.css">
+{% extends 'master.html' %}
 
-</head>
-<body>
-<div class="bod">
-    {% if not session['ID'] %}
-        <div class="father-butto">
-            <input class="butto" type="button" onclick="location.href='/register'" value="Register">
-            <input class="butto" type="button" onclick="location.href='/login'" value="Login">
-    {% endif %}
-            <input class="butto" type="button" onclick="location.href='/'" value="Home">
-    {% if session['ID'] %}
-            <input class="butto" type="button" onclick="location.href='/logout'" value="Logout">
-    {% endif %}
+{% block content_header  %}
+{% endblock %}
+{% block content  %}
+<section class="content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Cars</h3>
+
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="table_search" class="form-control float-right"
+                                       placeholder="Search">
+
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-hover text-nowrap">
+                            <thead>
+                            <tr>
+                                <th>Car Id</th>
+                                <th>Car Make</th>
+                                <th>Car Name</th>
+                                <th>Year</th>
+                                <th>Avg Review</th>
+                                <th>Image</th>
+                                <th>Details</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for car in cars %}
+                            <tr>
+                                <td>{{ car.id }}</td>
+                                <td>{{ car.make }}</td>
+                                <td>{{ car.name }}</td>
+                                <td>{{ car.year }}</td>
+                                <td>{{ car.year }}</td>
+                                <td><img src="{{url_for('static', filename= car.image )}}"
+                                         style="width:150px;height:150px;"></td>
+                                <td>
+                                    <input calss="detail" type="button"
+                                           onclick="location.href='{{ url_for('car_details', car_id=car.id) }}'"
+                                           value="Details">
+                                </td>
+                            </tr>
+
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
         </div>
-    {% block content %}
-    <table>
-        <tr>
-            <th>Car Id</th>
-            <th>Car Name</th>
-            <th>Car Model</th>
-            <th>Year</th>
-            <th>Avg Review</th>
-            <th>Image</th>
-            <th>Details</th>
-        </tr>
 
-
-        {% for car in cars %}
-        <tr>
-            <td>{{ car.id }}</td>
-            <td>{{ car.name }}</td>
-            <td>{{ car.model }}</td>
-            <td>{{ car.year }}</td>
-            <td>{{ car.year }}</td>
-            <td><img src="{{url_for('static', filename= car.image )}}" style="width:150px;height:150px;"></td>
-            <td>
-                <input calss="detail" type="button" onclick="location.href='{{ url_for('car_details', car_id=car.id) }}'" value="Details">
-            </td>
-        </tr>
-
-        {% endfor %}
-    </table>
-    {% endblock %}
-
-</div>
-</body>
-</html>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+{% endblock %}
