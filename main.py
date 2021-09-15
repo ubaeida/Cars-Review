@@ -1,24 +1,3 @@
-# Cars review project.
-# 1-  Register a user
-# 2- log in
-# 3- show cars from database
-# 4- add and edit cars to the database
-# 5- View cars details (show for everyone)
-# 6- add car review  and opinion box
-# 7- search for cars
-# 8- log out
-
-#############################
-# init User
-# init car
-# init review
-
-#############################
-# database.
-# table for users (id, username, password)
-# table for cars (id , car name, car model, year, image)
-# table for review (car_id, id_user, opinion box, rate of 10)
-
 import os
 
 from flask import *
