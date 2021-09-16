@@ -1,6 +1,7 @@
 from models.Car import Car
 from models.Review import Review
 from servcies.ServiceBase import ServiceBase
+from models.imge import imges
 
 all_cars = "select id, make, name, year, image from cars"
 
@@ -33,3 +34,14 @@ class CarService(ServiceBase):
         reviews = list(map(lambda row: Review(row[2], c_id, row[3], user_name=row[4]), out))
         c.close()
         return car, list(filter(None, reviews))
+
+    def get_car_img(self, car_id):
+        self.connect()
+        car_id = int(car_id)
+        c = self.db.cursor()
+        query = f"select first_img, second_img, third_img, fuorth_img, fifth_img FROM cars.images where car_id = {car_id}"
+        c.execute(query)
+        out = c.fetchall()
+        row = out[0]
+        img = imges(first_img=row[0], second_img=row[1], third_img=row[2], fourth_img=row[3], fifth_img=row[4])
+        return img

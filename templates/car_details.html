@@ -3,13 +3,29 @@
 {% block content  %}
 <section class="content">
     <div class="container-fluid">
-
+        <div class="row">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">car images</h3>
+                </div>
+                <div>
+                    <table>
+                            <td><img src="{{url_for('static', filename= img.first_img )}}" style="width:150px;height:150px;"></td>
+                            <td><img src="{{url_for('static', filename= img.second_img )}}" style="width:150px;height:150px;"></td>
+                            <td><img src="{{url_for('static', filename= img.third_img )}}" style="width:150px;height:150px;"></td>
+                            <td><img src="{{url_for('static', filename= img.fourth_img )}}" style="width:150px;height:150px;"></td>
+                            <td><img src="{{url_for('static', filename= img.fifth_img )}}" style="width:150px;height:150px;"></td>
+                    </table>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">{{ car.name }} Reviews</h3>
                     </div>
+
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">
                         {% if reviews is not none %}
@@ -26,7 +42,6 @@
                                 <td>{{ review.user_name}}</td>
                                 <td>{{ review.review }}</td>
                             </tr>
-
                             {% endfor %}
                             </tbody>
                         </table>

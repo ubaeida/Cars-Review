@@ -1,7 +1,5 @@
 import os
-
 from flask import *
-
 from flask_session import Session
 from servcies.car_service import CarService
 from servcies.user_service import UserService
@@ -35,7 +33,8 @@ def car_details(car_id):
         user_id = session['ID']
         user_service.add_review(user_id, car_id, review)
     car, reviews = car_service.get_car_details(car_id)
-    return render_template('car_details.html', title='Car details', car=car, reviews=reviews)
+    imges = car_service.get_car_img(car_id)
+    return render_template('car_details.html', title='Car details', car=car, reviews=reviews, img=imges)
 
 
 @app.route("/login", methods=['GET', 'POST'])
