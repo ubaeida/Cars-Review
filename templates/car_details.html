@@ -10,11 +10,9 @@
                 </div>
                 <div>
                     <table>
-                            <td><img src="{{url_for('static', filename= img.first_img )}}" style="width:150px;height:150px;"></td>
-                            <td><img src="{{url_for('static', filename= img.second_img )}}" style="width:150px;height:150px;"></td>
-                            <td><img src="{{url_for('static', filename= img.third_img )}}" style="width:150px;height:150px;"></td>
-                            <td><img src="{{url_for('static', filename= img.fourth_img )}}" style="width:150px;height:150px;"></td>
-                            <td><img src="{{url_for('static', filename= img.fifth_img )}}" style="width:150px;height:150px;"></td>
+                        {% for images in img %}
+                            <td><img src="{{url_for('static', filename= images.img )}}" style="width:150px;height:150px;"></td>
+                        {% endfor %}
                     </table>
                 </div>
             </div>

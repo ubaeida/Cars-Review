@@ -33,8 +33,8 @@ def car_details(car_id):
         user_id = session['ID']
         user_service.add_review(user_id, car_id, review)
     car, reviews = car_service.get_car_details(car_id)
-    imges = car_service.get_car_img(car_id)
-    return render_template('car_details.html', title='Car details', car=car, reviews=reviews, img=imges)
+    imge = car_service.get_car_img(car_id)
+    return render_template('car_details.html', title='Car details', car=car, reviews=reviews, img=imge)
 
 
 @app.route("/login", methods=['GET', 'POST'])

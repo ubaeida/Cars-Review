@@ -1,7 +1,7 @@
 from models.Car import Car
 from models.Review import Review
 from servcies.ServiceBase import ServiceBase
-from models.imge import imges
+from models.imge import imge
 
 all_cars = "select id, make, name, year, image from cars"
 
@@ -39,9 +39,11 @@ class CarService(ServiceBase):
         self.connect()
         car_id = int(car_id)
         c = self.db.cursor()
-        query = f"select first_img, second_img, third_img, fuorth_img, fifth_img FROM cars.images where car_id = {car_id}"
+        query = f"select img FROM cars.images where car_id = {car_id}"
         c.execute(query)
         out = c.fetchall()
-        row = out[0]
-        img = imges(first_img=row[0], second_img=row[1], third_img=row[2], fourth_img=row[3], fifth_img=row[4])
-        return img
+        images = []
+        for row in out:
+            print(row)
+            images.append(imge(img=row))
+        return images
