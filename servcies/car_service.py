@@ -44,6 +44,5 @@ class CarService(ServiceBase):
         out = c.fetchall()
         images = []
         for row in out:
-            print(row)
             images.append(imge(img=row))
         return images

@@ -3,36 +3,50 @@
 {% block content  %}
 <section class="content">
     <div class="container-fluid">
-        <div class="row">
-            <div class="card">
-                <div class="card-header">
+        <div class="card">
+            <div class="card-header">
                     <h3 class="card-title">car images</h3>
-                </div>
-                <div>
-                    <table>
+            </div>
+            <div class="container-fluid">
                         {% for images in img %}
-                            <td><img src="{{url_for('static', filename= images.img )}}" style="width:150px;height:150px;"></td>
+                        <!-- Full-width images with number text -->
+                        <div class="mySlides">
+                            <div class="numbertext"> {{ images.img|length }} / {{ img|length }}</div>
+                              <img src="{{url_for('static', filename= images.img )}}">
+                        </div>
                         {% endfor %}
-                    </table>
+                        <!-- Next and previous buttons -->
+                        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                        <!-- Image text -->
+                        <div class="caption-container">
+                            <p id="caption"></p>
+                        </div>
+                        <div class="row_img">
+                            {% for images in img %}
+                        <div class="row_column">
+                            <img class="demo cursor" src="{{url_for('static', filename= images.img )}}" style="width:100%" onclick="currentSlide({{ images.img }})" alt="{{ images.img }}">
+                        </div>
+                        {% endfor %}
                 </div>
             </div>
         </div>
+    <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">{{ car.name }} Reviews</h3>
                     </div>
-
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">
                         {% if reviews is not none %}
                         <table class="table table-hover text-nowrap">
                             <thead>
-                            <tr>
-                                <th>User</th>
-                                <th>Review</th>
-                            </tr>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Review</th>
+                                </tr>
                             </thead>
                             <tbody>
                             {% for review in reviews %}
@@ -52,17 +66,18 @@
                 <!-- /.card -->
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Your Review</h3>
-                    </div>
-                    <div class="card-body table-responsive p-0">
-                        {% if session['ID'] %}
-                        <h3>Insert your review about the car below, please!</h3>
-                        <form method="post">
-                            <input type="hidden" name='car_id' value="{{car.id}}">
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Your Review</h3>
+                </div>
+                <div class="card-body table-responsive p-0">
+                    {% if session['ID'] %}
+                    <h3>Insert your review about the car below, please!</h3>
+                    <form method="post">
+                        <input type="hidden" name='car_id' value="{{car.id}}">
                             <div class="tit-i">
                                 <select id='review_element' name='review'>
                                   <option value="1">1</option>
@@ -70,21 +85,173 @@
                                   <option value="3">3</option>
                                   <option value="4">4</option>
                                   <option value="5">5</option>
-                                </select>
-                            </div>
+                               </select>
+                           </div>
+                        <div class="rev">
+                            <input class="butt" type="submit" value="Add your review">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Engine Review</h3>
+                </div>
+                    <div class="card-body table-responsive p-0">
+                        <h3>Insert your review about the engine below, please!</h3>
+                        <form method="post">
+                            <input type="hidden" name='car_id' value="{{car.id}}">
+                        <div class="tit-i">
+                            <select id='Engine_element' name='review'>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="rev">
+                            <input class="butt" type="submit" value="Add your review">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Comfort Review</h3>
+                </div>
+                <div class="card-body table-responsive p-0">
+                    <h3>Insert your review about the comfort below, please!</h3>
+                    <form method="post">
+                        <input type="hidden" name='car_id' value="{{car.id}}">
+                        <div class="tit-i">
+                            <select id='Comfort_element' name='review'>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
                             <div class="rev">
                                 <input class="butt" type="submit" value="Add your review">
                             </div>
                         </form>
-                        {% else %}
-                        <div class="er"> Login to add your review</div>
-                        <input type="button" onclick="location.href='/login'" value="Login">
-                        {% endif %}
                     </div>
+                </div>
+            </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Fuel Review</h3>
+                </div>
+                    <div class="card-body table-responsive p-0">
+                        <h3>Insert your review about the fuel below, please!</h3>
+                    <form method="post">
+                        <input type="hidden" name='car_id' value="{{car.id}}">
+                        <div class="tit-i">
+                            <select id='Fuel_element' name='review'>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="rev">
+                            <input class="butt" type="submit" value="Add your review">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Stability Review</h3>
+                </div>
+                <div class="card-body table-responsive p-0">
+                    <h3>Insert your review about the stability below, please!</h3>
+                    <form method="post">
+                        <input type="hidden" name='car_id' value="{{car.id}}">
+                        <div class="tit-i">
+                            <select id='Stability_element' name='review'>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="rev">
+                            <input class="butt" type="submit" value="Add your review">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Safety Review</h3>
+                </div>
+                <div class="card-body table-responsive p-0">
+                    <h3>Insert your review about the safety below, please!</h3>
+                    <form method="post">
+                        <input type="hidden" name='car_id' value="{{car.id}}">
+                        <div class="tit-i">
+                            <select id='safety_element' name='review'>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="rev">
+                            <input class="butt" type="submit" value="Add your review">
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
         <!-- /.row -->
-    </div><!-- /.container-fluid -->
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Technology Review</h3>
+                </div>
+                <div class="card-body table-responsive p-0">
+                    <h3>Insert your review about the technology below, please!</h3>
+                    <form method="post">
+                        <input type="hidden" name='car_id' value="{{car.id}}">
+                        <div class="tit-i">
+                            <select id='technology_element' name='review'>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="rev">
+                            <input class="butt" type="submit" value="Add your review">
+                        </div>
+                    </form>
+                    {% else %}
+                        <div class="er"> Login to add your review</div>
+                        <input type="button" onclick="location.href='/login'" value="Login">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+        </div>
+    </div>
+    <!-- /.container-fluid -->
 </section>
 {% endblock %}
