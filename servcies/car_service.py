@@ -42,12 +42,8 @@ class CarService(ServiceBase):
         query = f"select img FROM cars.images where car_id = {car_id}"
         c.execute(query)
         out = c.fetchall()
-        car_image = list(map(lambda image: image, out))
-        print(car_image)
+        c.close()
+        car_image = []
+        for image in out:
+            car_image.append(Gallery(image=image))
         return car_image
-
-        # for img in out:
-        #     print(img)
-        #     car_image.append(Gallery(image=img))
-        #     print(str(car_image))
-        # return car_image

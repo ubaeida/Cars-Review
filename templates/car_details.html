@@ -11,8 +11,8 @@
                         {% for image in gallery %}
                         <!-- Full-width images with number text -->
                         <div class="mySlides">
-                            <div class="numbertext"> {{ image.gallery|length  }} / {{ gallery|length }}</div>
-                              <img src="{{url_for('static', filename= image )}}">
+                            <div class="numbertext"> {{ image.image|length }} / {{ gallery|length }}</div>
+                              <img src="{{url_for('static', filename= image.image )}}">
                         </div>
                         {% endfor %}
                         <!-- Next and previous buttons -->
@@ -25,7 +25,7 @@
                         <div class="row_img">
                             {% for image in gallery %}
                         <div class="row_column">
-                            <img class="demo cursor" src="{{url_for('static', filename= image)}}" style="width:100%" onclick="currentSlide({{ image.gallery|length }})" alt="{{ image }}">
+                            <img class="demo cursor" src="{{url_for('static', filename=  image.image )}}" style="width:100%" onclick="currentSlide({{ image.image|length }})" alt="{{ image }}">
                         </div>
                         {% endfor %}
                 </div>
