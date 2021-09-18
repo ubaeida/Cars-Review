@@ -5,14 +5,14 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                    <h3 class="card-title">car images</h3>
+                    <h3 class="card-title">Car Images</h3>
             </div>
             <div class="container-fluid">
-                        {% for images in img %}
+                        {% for image in gallery %}
                         <!-- Full-width images with number text -->
                         <div class="mySlides">
-                            <div class="numbertext"> {{ images.img|length }} / {{ img|length }}</div>
-                              <img src="{{url_for('static', filename= images.img )}}">
+                            <div class="numbertext"> {{ image.gallery|length  }} / {{ gallery|length }}</div>
+                              <img src="{{url_for('static', filename= image )}}">
                         </div>
                         {% endfor %}
                         <!-- Next and previous buttons -->
@@ -23,9 +23,9 @@
                             <p id="caption"></p>
                         </div>
                         <div class="row_img">
-                            {% for images in img %}
+                            {% for image in gallery %}
                         <div class="row_column">
-                            <img class="demo cursor" src="{{url_for('static', filename= images.img )}}" style="width:100%" onclick="currentSlide({{ images.img }})" alt="{{ images.img }}">
+                            <img class="demo cursor" src="{{url_for('static', filename= image)}}" style="width:100%" onclick="currentSlide({{ image.gallery|length }})" alt="{{ image }}">
                         </div>
                         {% endfor %}
                 </div>

@@ -1,7 +1,7 @@
 from models.Car import Car
 from models.Review import Review
 from servcies.ServiceBase import ServiceBase
-from models.imge import imge
+from models.Cars_image_gallery import Gallery
 
 all_cars = "select id, make, name, year, image from cars"
 
@@ -42,7 +42,12 @@ class CarService(ServiceBase):
         query = f"select img FROM cars.images where car_id = {car_id}"
         c.execute(query)
         out = c.fetchall()
-        images = []
-        for row in out:
-            images.append(imge(img=row))
-        return images
+        car_image = list(map(lambda image: image, out))
+        print(car_image)
+        return car_image
+
+        # for img in out:
+        #     print(img)
+        #     car_image.append(Gallery(image=img))
+        #     print(str(car_image))
+        # return car_image
