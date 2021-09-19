@@ -34,6 +34,9 @@ def car_details(car_id):
         user_service.add_review(user_id, car_id, review)
     car, reviews = car_service.get_car_details(car_id)
     gallery = car_service.get_car_img(car_id)
+    # image_header = car_service.get_car_details(car_id)
+    # str(image_header)
+    # image_header.strip(".jpg")
     return render_template('car_details.html', title='Car details', car=car, reviews=reviews, gallery=gallery)
 
 
