@@ -29,7 +29,6 @@ class UserService(ServiceBase):
         params = (user_id, int(car_id))
         c.execute(query, params)
         out = c.fetchall()
-        print(out)
         c.close()
         for row in out:
             if row is not None:
@@ -44,7 +43,7 @@ class UserService(ServiceBase):
         self.connect()
         user_id = int(user_id)
         car_id = int(car_id)
-        all_review = int(all_review)
+        # all_review = int(all_review)
         # engine_review = int(engine_review)
         # comfort_review = int(comfort_review)
         # fuel_review = int(fuel_review)
