@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                    <h3 class="card-title">Car Images</h3>
+                    <h3>Car Images</h3>
             </div>
             <div class="container-fluid">
                         {% for image in gallery %}
@@ -36,7 +36,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">{{ car.name }} Reviews</h3>
+                        <h3>{{ car.name }} Reviews</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">
@@ -45,14 +45,26 @@
                             <thead>
                                 <tr>
                                     <th>User</th>
-                                    <th>Review</th>
+                                    <th>Over all Review</th>
+                                    <th>Engine Review</th>
+                                    <th>Comfort Review</th>
+                                    <th>Fuel Review</th>
+                                    <th>Stability Review </th>
+                                    <th>Safety Review</th>
+                                    <th>Technology Review</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            {% for review in reviews %}
+                            {% for review in all_review %}
                             <tr>
                                 <td>{{ review.user_name}}</td>
-                                <td>{{ review.review }}</td>
+                                <td>{{ review.all_review }}</td>
+                                <td>{{ review.engine_review }}</td>
+                                <td>{{ review.comfort_review }}</td>
+                                <td>{{ review.fuel_review }}</td>
+                                <td>{{ review.stability_review }}</td>
+                                <td>{{ review.safety_review }}</td>
+                                <td>{{ review.technology_review }}</td>
                             </tr>
                             {% endfor %}
                             </tbody>
@@ -79,7 +91,7 @@
                     <form method="post">
                         <input type="hidden" name='car_id' value="{{car.id}}">
                             <div class="tit-i">
-                                <select id='review_element' name='review'>
+                                <select id='review_element' name='all_review'>
                                   <option value="1">1</option>
                                   <option value="2">2</option>
                                   <option value="3">3</option>
@@ -104,7 +116,7 @@
                         <form method="post">
                             <input type="hidden" name='car_id' value="{{car.id}}">
                         <div class="tit-i">
-                            <select id='Engine_element' name='review'>
+                            <select id='Engine_element' name='engine_review'>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -129,7 +141,7 @@
                     <form method="post">
                         <input type="hidden" name='car_id' value="{{car.id}}">
                         <div class="tit-i">
-                            <select id='Comfort_element' name='review'>
+                            <select id='Comfort_element' name='comfort_review'>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -154,7 +166,7 @@
                     <form method="post">
                         <input type="hidden" name='car_id' value="{{car.id}}">
                         <div class="tit-i">
-                            <select id='Fuel_element' name='review'>
+                            <select id='Fuel_element' name='fuel_review'>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -179,7 +191,7 @@
                     <form method="post">
                         <input type="hidden" name='car_id' value="{{car.id}}">
                         <div class="tit-i">
-                            <select id='Stability_element' name='review'>
+                            <select id='Stability_element' name='stability_review'>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -204,7 +216,7 @@
                     <form method="post">
                         <input type="hidden" name='car_id' value="{{car.id}}">
                         <div class="tit-i">
-                            <select id='safety_element' name='review'>
+                            <select id='safety_element' name='safety_review'>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -230,7 +242,7 @@
                     <form method="post">
                         <input type="hidden" name='car_id' value="{{car.id}}">
                         <div class="tit-i">
-                            <select id='technology_element' name='review'>
+                            <select id='technology_element' name='technology_review'>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>

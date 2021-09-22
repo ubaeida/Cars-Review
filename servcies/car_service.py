@@ -16,7 +16,6 @@ class CarService(ServiceBase):
         # cars = []
         # for row in rows:
         #    cars.append(Car(row[0], row[1], row[2], row[3], row[4]))
-
         # functional style
         return map(lambda row: Car(row[0], row[1], row[2], row[3], row[4]), rows)
 
@@ -24,16 +23,18 @@ class CarService(ServiceBase):
         self.connect()
         c_id = int(car_id)
         c = self.db.cursor()
-        query = f"""select c.id, c.name, r.user_id, r.review, u.name from cars c
+        query = f"""select c.id, c.name, r.user_id, r.*, u.name from cars c
                 left join reviews r on c.id = r.car_id
                 left JOIN users u on u.id = r.user_id where c.id = {c_id} """
         c.execute(query)
         out = c.fetchall()
         first_row = out[0]
         car = Car(_id=first_row[0], name=first_row[1], make='', image='', year=0000)
-        reviews = list(map(lambda row: Review(row[2], c_id, row[3], user_name=row[4]), out))
+        reviews = list(map(lambda row: Review(user_id=row[2], car_id=row[0], all_review=row[3], engine_review=row[6],
+                                              comfort_review=row[7], fuel_review=row[8], stability_review=row[9],
+                                              safety_review=row[10], technology_review=row[11], user_name=row[12]), out))
         c.close()
-        return car, list(filter(None, reviews))
+        return car, reviews
 
     def get_car_img(self, car_id):
         self.connect()
