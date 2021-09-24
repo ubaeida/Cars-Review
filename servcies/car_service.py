@@ -2,22 +2,36 @@ from models.Car import Car
 from models.Review import Review
 from servcies.ServiceBase import ServiceBase
 from models.Cars_image_gallery import Gallery
-
-all_cars = "select id, make, name, year, image from cars"
+import numpy
 
 
 class CarService(ServiceBase):
 
+    def get_review_avg(self, car_id):
+        self.connect()
+        c = self.db.cursor()
+        avg_query = f'select all_review from reviews where car_id = {car_id};'
+        c.execute(avg_query)
+        out = c.fetchall()
+        review_avg = numpy.mean(out)
+        avg = format(review_avg, ".1f")
+        print(avg)
+        insert_query = f"update cars set avg_review ={avg} where id={car_id};"
+        c.execute(insert_query)
+        c.close()
+
     def show_cars(self):
         c = self.db.cursor()
+        all_cars = "select id, make, name, year, image, avg_review from cars"
         c.execute(all_cars)
         rows = c.fetchall()
+        print(rows)
         # imperative style
         # cars = []
         # for row in rows:
-        #    cars.append(Car(row[0], row[1], row[2], row[3], row[4]))
+        #    cars.append(Car(_id=row[0], make=row[1], name=row[2], year=row[3], image=[4], avg_review=row[5]))
         # functional style
-        return map(lambda row: Car(row[0], row[1], row[2], row[3], row[4]), rows)
+        return map(lambda row: Car(row[0], row[1], row[2], row[3], row[4], row[5]), rows)
 
     def get_car_details(self, car_id):
         self.connect()
@@ -29,7 +43,7 @@ class CarService(ServiceBase):
         c.execute(query)
         out = c.fetchall()
         first_row = out[0]
-        car = Car(_id=first_row[0], name=first_row[1], make='', image='', year=0000)
+        car = Car(_id=first_row[0], name=first_row[1], make='', image='', avg_review=0.0, year=0000)
         reviews = list(map(lambda row: Review(user_id=row[2], car_id=row[0], all_review=row[3], engine_review=row[6],
                                               comfort_review=row[7], fuel_review=row[8], stability_review=row[9],
                                               safety_review=row[10], technology_review=row[11], user_name=row[12]), out))

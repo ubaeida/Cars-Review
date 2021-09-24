@@ -46,7 +46,7 @@
                                 <td>{{ car.make }}</td>
                                 <td>{{ car.name }}</td>
                                 <td>{{ car.year }}</td>
-                                <td>{{ car.year }}</td>
+                                <td>{{ car.avg_review }}</td>
                                 <td><img src="{{url_for('static', filename= car.image )}}"
                                          style="width:150px;height:150px;"></td>
                                 <td>
@@ -55,7 +55,6 @@
                                            value="Details">
                                 </td>
                             </tr>
-
                             {% endfor %}
                             </tbody>
                         </table>

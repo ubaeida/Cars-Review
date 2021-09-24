@@ -45,30 +45,26 @@ class UserService(ServiceBase):
         user_id = int(user_id)
         car_id = int(car_id)
         all_review = int(all_review)
-        # engine_review = int(engine_review)
-        # comfort_review = int(comfort_review)
-        # fuel_review = int(fuel_review)
-        # stability_review = int(stability_review)
-        # safety_review = int(safety_review)
-        # technology_review = int(technology_review)
+        engine_review = int(engine_review)
+        comfort_review = int(comfort_review)
+        fuel_review = int(fuel_review)
+        stability_review = int(stability_review)
+        safety_review = int(safety_review)
+        technology_review = int(technology_review)
         old_review = self.get_review(user_id, car_id)
         if old_review is None:
             query = "insert into reviews " \
                     "(user_id, car_id, all_review, engine_review, comfort_review," \
                     "fuel_review, stability_review, safety_review, technology_review )" \
-                    " values (%s , %s , %s , %s , %s , %s , %s , %s , %s)"
-            params = (user_id, car_id, all_review, engine_review, comfort_review,
-                      fuel_review, stability_review, safety_review, technology_review)
-            print(query % params)
+                    f" values ({user_id}, {car_id}, {all_review}, {engine_review}, {comfort_review},{fuel_review}, " \
+                    f"{stability_review}, {safety_review}, {technology_review})"
         else:
-            params = (user_id, car_id, all_review, engine_review, comfort_review,
-                      fuel_review, stability_review, safety_review, technology_review)
-            query = 'update reviews set all_review = %s, engine_review = %s, comfort_review = %s, ' \
-                    'fuel_review = %s, stability_review = %s, safety_review = %s, technology_review = %s' \
-                    ' where user_id = %s and car_id = %s'
-            print(query % params)
+            query = f'update reviews set all_review = {all_review}, engine_review = {engine_review},' \
+                    f' comfort_review = {comfort_review},fuel_review = {fuel_review}, stability_review = {stability_review},' \
+                    f' safety_review = {safety_review}, technology_review = {technology_review}' \
+                    f' where user_id = {user_id} and car_id = {car_id}'
         c = self.db.cursor()
-        c.execute(query, params)
+        c.execute(query)
         c.close()
         self.db.commit()
         self.db.close()
