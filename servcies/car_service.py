@@ -2,30 +2,15 @@ from models.Car import Car
 from models.Review import Review
 from servcies.ServiceBase import ServiceBase
 from models.Cars_image_gallery import Gallery
-import numpy
 
 
 class CarService(ServiceBase):
-
-    def get_review_avg(self, car_id):
-        self.connect()
-        c = self.db.cursor()
-        avg_query = f'select all_review from reviews where car_id = {car_id};'
-        c.execute(avg_query)
-        out = c.fetchall()
-        review_avg = numpy.mean(out)
-        avg = format(review_avg, ".1f")
-        print(avg)
-        insert_query = f"update cars set avg_review ={avg} where id={car_id};"
-        c.execute(insert_query)
-        c.close()
 
     def show_cars(self):
         c = self.db.cursor()
         all_cars = "select id, make, name, year, image, avg_review from cars"
         c.execute(all_cars)
         rows = c.fetchall()
-        print(rows)
         # imperative style
         # cars = []
         # for row in rows:

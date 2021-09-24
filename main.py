@@ -41,7 +41,7 @@ def car_details(car_id):
                                 stability_review, safety_review, technology_review)
     car, all_review = car_service.get_car_details(car_id)
     gallery = car_service.get_car_img(car_id)
-    avg = car_service.get_review_avg(car_id)
+    avg = user_service.get_review_avg(car_id)
     return render_template('car_details.html', title='Car details', car=car, gallery=gallery, all_review=all_review,
                            avg=avg)
 
