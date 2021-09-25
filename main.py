@@ -9,6 +9,7 @@ from views.RegisterForm import RegisterForm
 
 user_service = UserService()
 car_service = CarService()
+ReviewService = ReviewService()
 
 
 class Config(object):
