@@ -3,6 +3,7 @@ from flask import *
 from flask_session import Session
 from servcies.car_service import CarService
 from servcies.user_service import UserService
+from servcies.ReviewService import ReviewService
 from views.LoginForm import LoginForm
 from views.RegisterForm import RegisterForm
 
@@ -37,13 +38,11 @@ def car_details(car_id):
         safety_review = request.form.get('safety_review')
         technology_review = request.form.get('technology_review')
         user_id = session['ID']
-        user_service.add_review(user_id, car_id, all_review, engine_review, comfort_review, fuel_review,
-                                stability_review, safety_review, technology_review)
+        ReviewService.add_review(user_id, car_id, all_review, engine_review, comfort_review, fuel_review,
+                                 stability_review, safety_review, technology_review)
     car, all_review = car_service.get_car_details(car_id)
     gallery = car_service.get_car_img(car_id)
-    avg = user_service.get_review_avg(car_id)
-    return render_template('car_details.html', title='Car details', car=car, gallery=gallery, all_review=all_review,
-                           avg=avg)
+    return render_template('car_details.html', title='Car details', car=car, gallery=gallery, all_review=all_review)
 
 
 @app.route("/login", methods=['GET', 'POST'])
