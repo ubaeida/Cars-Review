@@ -6,10 +6,12 @@ from servcies.user_service import UserService
 from servcies.ReviewService import ReviewService
 from views.LoginForm import LoginForm
 from views.RegisterForm import RegisterForm
+from servcies.attribute_service import AttributeService
 
 user_service = UserService()
 car_service = CarService()
 ReviewService = ReviewService()
+AttributeService = AttributeService()
 
 
 class Config(object):
@@ -43,7 +45,9 @@ def car_details(car_id):
                                  stability_review, safety_review, technology_review)
     car, all_review = car_service.get_car_details(car_id)
     gallery = car_service.get_car_img(car_id)
-    return render_template('car_details.html', title='Car details', car=car, gallery=gallery, all_review=all_review)
+    attribute = AttributeService.show_attribute(car_id)
+    return render_template('car_details.html', title='Car details', car=car, gallery=gallery, all_review=all_review,
+                           attribute=attribute)
 
 
 @app.route("/login", methods=['GET', 'POST'])
