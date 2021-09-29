@@ -3,23 +3,35 @@
 {% block content  %}
 <section class="content">
     <div class="container-fluid">
-        <div class="card">
-            <div class="card-header">
-                <h3>Car Attributes</h3>
-            </div>
-            <div class="container-fluid">
-                <table>
-                    <tr>
-                        <th>Feature Name</th>
-                        <th>Feature Value</th>
-                    </tr>
-                {% for feature in attribute %}
-                    <tr>
-                        <td>{{ feature.attribute_name }}</td>
-                        <td>{{ feature.value }}</td>
-                    </tr>
-                {% endfor %}
-                </table>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body table-responsive p-0">
+                        <div class="card-header">
+                            <h3>Car Attributes</h3>
+                        </div>
+                        <table class="table table-hover text-nowrap">
+                            <thead>
+                            <div class="container-fluid">
+                                <tr>
+                                    <th>Feature Name</th>
+                                    <th>Feature Value</th>
+                                </tr>
+                            </div>
+                            </thead>
+                            <tbody>
+                                {% for feature in attribute %}
+                            <div class="container-fluid">
+                                <tr>
+                                    <td>{{ feature.attribute_name }}</td>
+                                    <td>{{ feature.value }}</td>
+                                </tr>
+                            </div>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="card">
@@ -150,9 +162,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- /.row -->
-
             <!-- /.row -->
         </div>
     </div>
