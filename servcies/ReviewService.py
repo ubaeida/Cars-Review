@@ -16,8 +16,8 @@ class ReviewService(ServiceBase):
             if row is not None:
                 print('searched review')
                 return Review(all_review=row[0], car_id=row[1], user_id=row[2], engine_review=row[3],
-                              comfort_review=row[4], fuel_review=row[5],
-                              stability_review=row[6], safety_review=row[7], technology_review=row[8], user_name='')
+                              comfort_review=row[4], fuel_review=row[5], stability_review=row[6], safety_review=row[7],
+                              technology_review=row[8], user_comment=row[9], user_name='')
         return None
 
     def get_review_avg(self, car_id):
@@ -32,7 +32,7 @@ class ReviewService(ServiceBase):
         return avg
 
     def add_review(self, user_id, car_id, all_review, engine_review, comfort_review,
-                   fuel_review, stability_review, safety_review, technology_review):
+                   fuel_review, stability_review, safety_review, technology_review, user_comment):
         self.connect()
         user_id = int(user_id)
         car_id = int(car_id)
@@ -43,20 +43,20 @@ class ReviewService(ServiceBase):
         stability_review = int(stability_review)
         safety_review = int(safety_review)
         technology_review = int(technology_review)
-        print(technology_review)
+        user_comment = str(user_comment)
         old_review = self.get_review(user_id, car_id)
         if old_review is None:
             query = "insert into reviews " \
                     "(user_id, car_id, all_review, engine_review, comfort_review," \
-                    "fuel_review, stability_review, safety_review, technology_review )" \
+                    "fuel_review, stability_review, safety_review, technology_review, user_comment)" \
                     f" values ({user_id}, {car_id}, {all_review}, {engine_review}, {comfort_review},{fuel_review}, " \
-                    f"{stability_review}, {safety_review}, {technology_review})"
+                    f"{stability_review}, {safety_review}, {technology_review}, {user_comment})"
             avg = self.get_review_avg(car_id=car_id)
             insert_query = f'update cars set avg_review = {avg} where id={car_id}'
         else:
             query = f'update reviews set all_review = {all_review}, engine_review = {engine_review},' \
-                    f' comfort_review = {comfort_review},fuel_review = {fuel_review}, stability_review = {stability_review},' \
-                    f' safety_review = {safety_review}, technology_review = {technology_review}' \
+                    f' comfort_review = {comfort_review}, fuel_review = {fuel_review}, stability_review = {stability_review},' \
+                    f' safety_review = {safety_review}, technology_review = {technology_review}, user_comment = {user_comment}' \
                     f' where user_id = {user_id} and car_id = {car_id}'
             avg = self.get_review_avg(car_id=car_id)
             insert_query = f'update cars.cars set avg_review = {avg} where id={car_id}'

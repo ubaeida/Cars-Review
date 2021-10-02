@@ -31,7 +31,8 @@ class CarService(ServiceBase):
         car = Car(_id=first_row[0], name=first_row[1], make='', image='', avg_review=0.0, year=0000)
         reviews = list(map(lambda row: Review(user_id=row[2], car_id=row[0], all_review=row[3], engine_review=row[6],
                                               comfort_review=row[7], fuel_review=row[8], stability_review=row[9],
-                                              safety_review=row[10], technology_review=row[11], user_name=row[12]), out))
+                                              safety_review=row[10], technology_review=row[11], user_comment=row[12],
+                                              user_name=row[13]), out))
         c.close()
         return car, reviews
 

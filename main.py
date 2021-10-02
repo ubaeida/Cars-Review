@@ -40,9 +40,10 @@ def car_details(car_id):
         stability_review = request.form.get('stability_review')
         safety_review = request.form.get('safety_review')
         technology_review = request.form.get('technology_review')
+        user_comment = request.form.get('user_comment')
         user_id = session['ID']
         ReviewService.add_review(user_id, car_id, all_review, engine_review, comfort_review, fuel_review,
-                                 stability_review, safety_review, technology_review)
+                                 stability_review, safety_review, technology_review, user_comment)
     car, all_review = car_service.get_car_details(car_id)
     gallery = car_service.get_car_img(car_id)
     attribute = AttributeService.show_attribute(car_id)

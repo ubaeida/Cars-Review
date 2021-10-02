@@ -84,6 +84,7 @@
                                     <th>Stability Review</th>
                                     <th>Safety Review</th>
                                     <th>Technology Review</th>
+                                    <th>User Comment</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -97,6 +98,7 @@
                                     <td>{{ review.stability_review }}</td>
                                     <td>{{ review.safety_review }}</td>
                                     <td>{{ review.technology_review }}</td>
+                                    <td>{{ review.user_comment }}</td>
                                 </tr>
                                 {% endfor %}
                                 </tbody>
@@ -148,6 +150,10 @@
                                     </div>
                                 </div>
                                 {% endfor%}
+                            </div>
+                            <div class="card-body">
+                                <h3>Enter Your Comment</h3>
+                                <input id="user_comment" name="user_comment" class="form-control" style="height:100px; width:500px;" placeholder="Enter your review..." type="text">
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
