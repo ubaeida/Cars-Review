@@ -3,37 +3,6 @@
 {% block content  %}
 <section class="content">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body table-responsive p-0">
-                        <div class="card-header">
-                            <h3>Car Attributes</h3>
-                        </div>
-                        <table class="table table-hover text-nowrap">
-                            <thead>
-                            <div class="container-fluid">
-                                <tr>
-                                    <th>Feature Name</th>
-                                    <th>Feature Value</th>
-                                </tr>
-                            </div>
-                            </thead>
-                            <tbody>
-                                {% for feature in attribute %}
-                            <div class="container-fluid">
-                                <tr>
-                                    <td>{{ feature.attribute_name }}</td>
-                                    <td>{{ feature.value }}</td>
-                                </tr>
-                            </div>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="card">
             <div class="card-header">
                 <h3>Car Images</h3>
@@ -84,7 +53,6 @@
                                     <th>Stability Review</th>
                                     <th>Safety Review</th>
                                     <th>Technology Review</th>
-                                    <th>User Comment</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -98,7 +66,6 @@
                                     <td>{{ review.stability_review }}</td>
                                     <td>{{ review.safety_review }}</td>
                                     <td>{{ review.technology_review }}</td>
-                                    <td>{{ review.user_comment }}</td>
                                 </tr>
                                 {% endfor %}
                                 </tbody>
@@ -151,10 +118,6 @@
                                 </div>
                                 {% endfor%}
                             </div>
-                            <div class="card-body">
-                                <h3>Enter Your Comment</h3>
-                                <input id="user_comment" name="user_comment" class="form-control" style="height:100px; width:500px;" placeholder="Enter your review..." type="text">
-                            </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary float-left">Ok</button>
@@ -168,6 +131,9 @@
                     </div>
                 </div>
             </div>
+
+            <!-- /.row -->
+
             <!-- /.row -->
         </div>
     </div>
