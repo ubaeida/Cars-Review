@@ -7,6 +7,8 @@ from servcies.ReviewService import ReviewService
 from views.LoginForm import LoginForm
 from views.RegisterForm import RegisterForm
 from servcies.attribute_service import AttributeService
+from flask_admin import Admin
+
 
 user_service = UserService()
 car_service = CarService()
@@ -19,6 +21,9 @@ class Config(object):
 
 
 app = Flask(__name__)
+app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
+admin = Admin(app, name='microblog', template_mode='bootstrap3')
+
 app.config['SECRET_KEY'] = 'you-will-never-guess'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
