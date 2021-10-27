@@ -9,3 +9,21 @@
     </div>
 </div>
 {% endmacro %}
+
+
+{% macro render_attribute(data_type, attribute_name, allowed_values, value) %}
+<div class="container-fluid">
+    <tr>
+        <td>{{ attribute_name }}</td>
+        <td> {% if data_type == 'SINGLE' %}
+            <select class="">
+                {% for allowed_value in allowed_values%}
+                <option value="allowed_value">{{allowed_value}}</option>
+                {% endfor %}
+            </select></td>
+        {% endif %}
+    </tr>
+</div>
+{% endmacro %}
+
+

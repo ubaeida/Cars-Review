@@ -54,14 +54,13 @@ class ReviewService(ServiceBase):
             avg = self.get_review_avg(car_id=car_id)
             insert_query = f'update cars set avg_review = {avg} where id={car_id}'
         else:
-            query = f"""update reviews set all_review = {all_review}, engine_review = {engine_review},
-                     comfort_review = {comfort_review}, fuel_review = {fuel_review}, stability_review = {stability_review},
-                     safety_review = {safety_review}, technology_review = {technology_review}, user_comment = '{user_comment}'
-                     where user_id = {user_id} and car_id = {car_id}"""
+            query = f'update reviews set all_review = {all_review}, engine_review = {engine_review},' \
+                    f' comfort_review = {comfort_review}, fuel_review = {fuel_review}, stability_review = {stability_review},' \
+                    f' safety_review = {safety_review}, technology_review = {technology_review}, user_comment = "{user_comment}"' \
+                    f' where user_id = {user_id} and car_id = {car_id}'
             avg = self.get_review_avg(car_id=car_id)
             insert_query = f'update cars.cars set avg_review = {avg} where id={car_id}'
         c = self.db.cursor()
-        print(query)
         c.execute(query)
         c.execute(insert_query)
         c.close()

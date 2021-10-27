@@ -32,6 +32,7 @@
                         </div>
                     </div>
                 </div>
+                {% from "_formhelpers.html" import render_attribute %}
                 <div class="col-4 col-sm-4">
                     <div class="card">
                         <div class="card-body table-responsive p-0">
@@ -48,13 +49,12 @@
                                 </div>
                                 </thead>
                                 <tbody>
-                                {% for feature in attribute %}
-                                <div class="container-fluid">
-                                    <tr>
-                                        <td>{{ feature.attribute_name }}</td>
-                                        <td>{{ feature.value }}</td>
-                                    </tr>
-                                </div>
+                                {% for attribute in car_attributes %}
+                                <tr>
+                                    <td>{{ attribute.attribute_name }}</td>
+                                    <td>{{attribute.value}}</td>
+                                </tr>
+
                                 {% endfor %}
                                 </tbody>
                             </table>

@@ -51,9 +51,9 @@ def car_details(car_id):
                                  stability_review, safety_review, technology_review, user_comment)
     car, all_review = car_service.get_car_details(car_id)
     gallery = car_service.get_car_img(car_id)
-    attribute = AttributeService.show_attribute(car_id)
+    car_attributes = AttributeService.get_attributes(car_id)
     return render_template('car_details.html', title='Car details', car=car, gallery=gallery, all_review=all_review,
-                           attribute=attribute)
+                           car_attributes=car_attributes)
 
 
 @app.route("/login", methods=['GET', 'POST'])
