@@ -72,3 +72,15 @@ class UserService(ServiceBase):
         c.close()
         self.db.commit()
         self.db.close()
+
+    def user_profile(self, user_id):
+        self.connect()
+        query = f'SELECT * FROM cars.users where id = {user_id}'
+        c = self.db.cursor()
+        c.execute(query)
+        out = c.fetchall()
+        c.close()
+        profile = []
+        for row in out:
+            profile.append(User(_id=row[0], username=row[1], password=row[2], name=row[3], email=row[4]))
+        return profile

@@ -73,6 +73,13 @@ def login():
     return render_template("login-v2.html", form=form, title="Log in")
 
 
+@app.route('/profile')
+def profile():
+    user_id = session['ID']
+    users = user_service.user_profile(user_id)
+    return render_template("profile.html", users=users)
+
+
 @app.route('/logout')
 def ses_end():
     session.pop('ID', None)
