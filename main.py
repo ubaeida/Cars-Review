@@ -77,7 +77,8 @@ def login():
 def profile():
     user_id = session['ID']
     users = user_service.user_profile(user_id)
-    return render_template("profile.html", users=users)
+    user_activities = user_service.user_activity(user_id)
+    return render_template("profile.html", users=users, user_activities=user_activities )
 
 
 @app.route('/logout')

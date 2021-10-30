@@ -8,7 +8,6 @@ class AttributeService(ServiceBase):
         c = self.db.cursor()
         query = "select a.id,a.name,a.data_type,a.allowed_values, ca.value from car_attributes ca left join attributes a " \
                 f"on a.id = ca.attribute_id where car_id= {car_id}"
-        print(f"-------\n{query}\n-------\n")
         c.execute(query)
         out = c.fetchall()
         c.close()

@@ -1,6 +1,8 @@
 from models.Review import Review
 from models.user import User
 from servcies.ServiceBase import ServiceBase
+from models.Car import Car
+from models.Review import Review
 
 
 class UserService(ServiceBase):
@@ -45,12 +47,6 @@ class UserService(ServiceBase):
         user_id = int(user_id)
         car_id = int(car_id)
         all_review = int(all_review)
-        # engine_review = int(engine_review)
-        # comfort_review = int(comfort_review)
-        # fuel_review = int(fuel_review)
-        # stability_review = int(stability_review)
-        # safety_review = int(safety_review)
-        # technology_review = int(technology_review)
         old_review = self.get_review(user_id, car_id)
         if old_review is None:
             query = "insert into reviews " \
@@ -84,3 +80,19 @@ class UserService(ServiceBase):
         for row in out:
             profile.append(User(_id=row[0], username=row[1], password=row[2], name=row[3], email=row[4]))
         return profile
+
+    def user_activity(self, user_id):
+        self.connect()
+        query = f'select u.id , r.* , c.name from users u left join ' \
+                f'reviews r on u.id = r.user_id left join cars c on r.car_id = c.id  where user_id = {user_id} '
+        c = self.db.cursor()
+        c.execute(query)
+        out = c.fetchall()
+        c.close()
+        print(out)
+        car = map(lambda row: Car(name=row[11], _id='', make='', year='', image='', avg_review=''), out)
+        review = map(lambda row: Review(all_review=row[1], engine_review=row[4], comfort_review=row[5],
+                                        fuel_review=row[6], stability_review=row[7], safety_review=row[8],
+                                        technology_review=row[9], car_id=row[2], user_id=row[3],
+                                        user_comment=row[10], user_name=''), out)
+        return car, review
