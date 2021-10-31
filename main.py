@@ -79,14 +79,15 @@ def profile():
     user_id = session['ID']
     users = user_service.user_profile(user_id)
     user_activities = user_service.user_activity(user_id)
-    form2 = ProfileUpdate()
+    form = ProfileUpdate()
     if request.method == 'post':
         username = request.form.get('username')
         name = request.form.get('name')
         email = request.form.get('email')
         password = request.form.get('password')
         user_service.update_profile(username, name, password, email, user_id)
-    return render_template("profile.html", user=user, user_activities=user_activities, form2=form2)
+
+    return render_template("profile.html", user=user, user_activities=user_activities, form=form)
 
 
 @app.route('/logout')
