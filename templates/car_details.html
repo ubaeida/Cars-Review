@@ -54,8 +54,7 @@
                                     <td>{{ attribute.attribute_name }}</td>
                                     <td>{{attribute.value}}</td>
                                 </tr>
-
-                                {% endfor %}
+                                {% endfor %}]?
                                 </tbody>
                             </table>
                         </div>
@@ -122,12 +121,9 @@
                         'safety_review':'Safety Review',
                         'technology_review':'Technology Review',
                         }) %}
-
-
                         <form class="form-horizontal" method="post">
                             <div class="card-body">
                                 {% for k,v in attributes.items() %}
-
                                 <div class="form-group row">
                                     <label for="{{k}}" class="col-sm-4 col-form-label">{{v}}</label>
                                     <div class="col-sm-8">

@@ -5,6 +5,7 @@ from servcies.car_service import CarService
 from servcies.user_service import UserService
 from servcies.ReviewService import ReviewService
 from views.LoginForm import LoginForm
+from views.ProfileUpdate import ProfileUpdate
 from views.RegisterForm import RegisterForm
 from servcies.attribute_service import AttributeService
 from flask_admin import Admin
@@ -78,13 +79,14 @@ def profile():
     user_id = session['ID']
     users = user_service.user_profile(user_id)
     user_activities = user_service.user_activity(user_id)
+    form2 = ProfileUpdate()
     if request.method == 'post':
         username = request.form.get('username')
         name = request.form.get('name')
         email = request.form.get('email')
         password = request.form.get('password')
         user_service.update_profile(username, name, password, email, user_id)
-    return render_template("profile.html", user=user, user_activities=user_activities)
+    return render_template("profile.html", user=user, user_activities=user_activities, form2=form2)
 
 
 @app.route('/logout')

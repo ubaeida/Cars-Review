@@ -135,31 +135,27 @@
                   <div class="tab-pane" id="settings">
                     <form class="form-horizontal" action="profile_update" method="post" novalidate>
                       <div class="form-group row">
-                        <label for="inputName" class="col-sm-2 col-form-label">User Name</label>
+                        <label for="username" class="col-sm-2 col-form-label">User Name</label>
                         <div class="col-sm-10">
-                        <input type="email" class="form-control" id="inputName" value="{{ user.username }}">
-                          {{ form.username }}
+                        <input type="email" class="form-control" id="username" value="{{ user.username }}">
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                        <label for="email" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                          <input type="email" class="form-control" id="inputEmail" value="{{ user.email }}">
-                          {{ form.email }}
+                          <input type="email" class="form-control" id="email" value="{{ user.email }}">
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="inputName2" class="col-sm-2 col-form-label">Name</label>
+                        <label for="name" class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputName2" value="{{ user.name }}">
-                          {{ form.name }}
+                          <input type="text" class="form-control" id="name" value="{{ user.name }}">
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="inputName2" class="col-sm-2 col-form-label">Old Password</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputName3" placeholder="Old password">
-                          {{ from.password }}
+                        <label for="password" class="col-sm-2 col-form-label">Old Password</label>
+                        <div class="password">
+                          <input type="password" class="form-control" id="password" placeholder="Old password">
                         </div>
                       </div>
                       <div class="form-group row">
@@ -171,7 +167,6 @@
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
                           <button type="submit" class="btn btn-danger">Submit</button>
-                          {{ form.submit(class_='btn btn-primary btn-block', value="profile_update") }}
                         </div>
                       </div>
                     </form>
