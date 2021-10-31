@@ -1,8 +1,8 @@
-from models.Review import Review
 from models.user import User
 from servcies.ServiceBase import ServiceBase
-from models.Car import Car
+from models.User_activity import UserActivity
 from models.Review import Review
+
 
 
 class UserService(ServiceBase):

@@ -73,12 +73,18 @@ def login():
     return render_template("login-v2.html", form=form, title="Log in")
 
 
-@app.route('/profile')
+@app.route('/profile', methods=['GET', 'POST'])
 def profile():
     user_id = session['ID']
     users = user_service.user_profile(user_id)
     user_activities = user_service.user_activity(user_id)
-    return render_template("profile.html", users=users, user_activities=user_activities )
+    if request.method == 'post':
+        username = request.form.get('username')
+        name = request.form.get('name')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        user_service.update_profile(username, name, password, email, user_id)
+    return render_template("profile.html", user=user, user_activities=user_activities)
 
 
 @app.route('/logout')
