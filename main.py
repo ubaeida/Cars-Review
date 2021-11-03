@@ -86,7 +86,6 @@ def profile():
         email = request.form.get('email')
         password = request.form.get('password')
         user_service.update_profile(username, name, password, email, user_id)
-
     return render_template("profile.html", user=user, user_activities=user_activities, form=form)
 
 

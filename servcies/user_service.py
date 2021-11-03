@@ -55,14 +55,12 @@ class UserService(ServiceBase):
                     " values (%s , %s , %s , %s , %s , %s , %s , %s , %s)"
             params = (user_id, car_id, all_review, engine_review, comfort_review,
                       fuel_review, stability_review, safety_review, technology_review)
-            print(query % params)
         else:
             params = (user_id, car_id, all_review, engine_review, comfort_review,
                       fuel_review, stability_review, safety_review, technology_review)
             query = 'update reviews set all_review = %s, engine_review = %s, comfort_review = %s, ' \
                     'fuel_review = %s, stability_review = %s, safety_review = %s, technology_review = %s' \
                     ' where user_id = %s and car_id = %s'
-            print(query % params)
         c = self.db.cursor()
         c.execute(query, params)
         c.close()
