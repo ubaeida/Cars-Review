@@ -4,189 +4,215 @@
 
 <div class="wrapper">
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>My Profile</h1>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-3">
-
-            <!-- Profile Image -->
-            <div class="card card-primary card-outline">
-              <div class="card-body box-profile">
-                <h3 class="profile-username text-center">{{ user.name }}</h3>
-
-                <p class="text-muted text-center">{{ user.username }}</p>
-
-                <ul class="list-group list-group-unbordered mb-3">
-                  <li class="list-group-item">
-                    <b>Email</b> <a class="float-right">{{ user.email }}</a>
-                </ul>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-            <!-- About Me Box -->
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">About Me</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <strong><i class="fas fa-book mr-1"></i> Education</strong>
-
-                <p class="text-muted">
-                  B.S. in Computer Science from the University of Tennessee at Knoxville
-                </p>
-
-                <hr>
-
-                <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
-
-                <p class="text-muted">Malibu, California</p>
-
-                <hr>
-
-                <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
-
-                <p class="text-muted">
-                  <span class="tag tag-danger">UI Design</span>
-                  <span class="tag tag-success">Coding</span>
-                  <span class="tag tag-info">Javascript</span>
-                  <span class="tag tag-warning">PHP</span>
-                  <span class="tag tag-primary">Node.js</span>
-                </p>
-
-                <hr>
-
-                <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
-          <!-- /.col -->
-          <div class="col-md-9">
-            <div class="card">
-              <div class="card-header p-2">
-                <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
-                </ul>
-              </div><!-- /.card-header -->
-              <div class="card-body">
-                <div class="tab-content">
-                  <div class="active tab-pane" id="activity">
-                    <div class="post">
-                      <table class="table table-hover text-nowrap">
-                        <thead>
-                        <tr>
-                            <th>Car name</th>
-                            <th>Over all Review</th>
-                            <th>Engine Review</th>
-                            <th>Comfort Review</th>
-                            <th>Fuel Review</th>
-                            <th>Stability Review</th>
-                            <th>Safety Review</th>
-                            <th>Technology Review</th>
-                            <th>User Comment</th>
-                        </tr>
-                        </thead>
-                        {% if user_activities is not none %}
-                        <tbody>
-                        {% for activity in user_activities %}
-                          <tr>
-                            <td>{{ activity.car_name }}</td>
-                            <td>{{ activity.review.all_review }}</td>
-                            <td>{{ activity.review.engine_review }}</td>
-                            <td>{{ activity.review.comfort_review }}</td>
-                            <td>{{ activity.review.fuel_review }}</td>
-                            <td>{{ activity.review.stability_review }}</td>
-                            <td>{{ activity.review.safety_review }}</td>
-                            <td>{{ activity.review.technology_review }}</td>
-                            <td>{{ activity.review.user_comment }}</td>
-                          </tr>
-                        {% endfor %}
-                        </tbody>
-                      </table>
-                        {% else %}
-                          <h2>You have no reviews yet</h2>
-                        {% endif %}
-                    <!-- /.card-body -->
-                    <!-- /.card -->
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>My Profile</h1>
                     </div>
-                  </div>
-
-                  <div class="tab-pane" id="settings">
-                    <form class="form-horizontal" action="profile" method="post" novalidate>
-                      <div class="form-group row">
-                        <label for="username" class="col-sm-2 col-form-label">User Name</label>
-                        <div class="col-sm-10">
-                        <input type="email" class="form-control" id="username" value=" {{ user.username }}">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="email" class="col-sm-2 col-form-label">Email</label>
-                        <div class="col-sm-10">
-
-                          <input type="email" class="form-control" id="email"  value=" {{ user.email }}">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="name" class="col-sm-2 col-form-label">Name</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" id="name" value="{{ user.name }}">
-                          {{ form.name }}
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="password" class="col-sm-2 col-form-label">Old Password</label>
-                        <div class="password">
-                          <input type="password" class="form-control" id="password" placeholder="Old password">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="inputSkills" class="col-sm-2 col-form-label">New Password</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputSkills" placeholder="New password">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <div class="offset-sm-2 col-sm-10">
-                          <button type="submit" class="btn btn-danger">Submit</button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <!-- /.tab-pane -->
                 </div>
-                <!-- /.tab-content -->
-              </div><!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
-          <!-- /.col -->
-        </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3">
+
+                        <!-- Profile Image -->
+                        <div class="card card-primary card-outline">
+                            <div class="card-body box-profile">
+                                <h3 class="profile-username text-center">{{ user.name }}</h3>
+
+                                <p class="text-muted text-center">{{ user.username }}</p>
+
+                                <ul class="list-group list-group-unbordered mb-3">
+                                    <li class="list-group-item">
+                                        <b>Email</b> <a class="float-right">{{ user.email }}</a>
+                                </ul>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+
+                        <!-- About Me Box -->
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">About Me</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <strong><i class="fas fa-book mr-1"></i> Education</strong>
+
+                                <p class="text-muted">
+                                    B.S. in Computer Science from the University of Tennessee at Knoxville
+                                </p>
+
+                                <hr>
+
+                                <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
+
+                                <p class="text-muted">Malibu, California</p>
+
+                                <hr>
+
+                                <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
+
+                                <p class="text-muted">
+                                    <span class="tag tag-danger">UI Design</span>
+                                    <span class="tag tag-success">Coding</span>
+                                    <span class="tag tag-info">Javascript</span>
+                                    <span class="tag tag-warning">PHP</span>
+                                    <span class="tag tag-primary">Node.js</span>
+                                </p>
+
+                                <hr>
+
+                                <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
+
+                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
+                                    fermentum enim neque.</p>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header p-2">
+                                <ul class="nav nav-pills">
+                                    <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a>
+                                    </li>
+                                    <li class="nav-item"><a class="nav-link" href="#settings"
+                                                            data-toggle="tab">Settings</a></li>
+                                </ul>
+                            </div><!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="active tab-pane" id="activity">
+                                        <div class="post">
+                                            <table class="table table-hover text-nowrap">
+                                                <thead>
+                                                <tr>
+                                                    <th>Car name</th>
+                                                    <th>Over all Review</th>
+                                                    <th>Engine Review</th>
+                                                    <th>Comfort Review</th>
+                                                    <th>Fuel Review</th>
+                                                    <th>Stability Review</th>
+                                                    <th>Safety Review</th>
+                                                    <th>Technology Review</th>
+                                                    <th>User Comment</th>
+                                                </tr>
+                                                </thead>
+                                                {% if user_activities is not none %}
+                                                <tbody>
+                                                {% for activity in user_activities %}
+                                                <tr>
+                                                    <td>{{ activity.car_name }}</td>
+                                                    <td>{{ activity.review.all_review }}</td>
+                                                    <td>{{ activity.review.engine_review }}</td>
+                                                    <td>{{ activity.review.comfort_review }}</td>
+                                                    <td>{{ activity.review.fuel_review }}</td>
+                                                    <td>{{ activity.review.stability_review }}</td>
+                                                    <td>{{ activity.review.safety_review }}</td>
+                                                    <td>{{ activity.review.technology_review }}</td>
+                                                    <td>{{ activity.review.user_comment }}</td>
+                                                </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                            {% else %}
+                                            <h2>You have no reviews yet</h2>
+                                            {% endif %}
+                                            <!-- /.card-body -->
+                                            <!-- /.card -->
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane" id="settings">
+                                        <fieldset>
+                                            <legend>Basic info</legend>
+                                            <form class="form-horizontal" action="profile" method="post" novalidate>
+                                                <input type="hidden" name="sub_action" value="update_info">
+                                                <div class="form-group row">
+                                                    <label for="username" class="col-sm-2 col-form-label">User
+                                                        Name</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="email" class="form-control" id="username"
+                                                               value=" {{ user.username }}">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="email" class="col-sm-2 col-form-label">Email</label>
+                                                    <div class="col-sm-10">
+
+                                                        <input type="email" class="form-control" id="email"
+                                                               value=" {{ user.email }}">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="name" class="col-sm-2 col-form-label">Name</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" id="name"
+                                                               value="{{ user.name }}">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="offset-sm-2 col-sm-10">
+                                                        <button type="submit" class="btn btn-danger">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </fieldset>
+                                        <fieldset>
+                                            <legend>Password</legend>
+                                            <form class="form-horizontal" action="profile" method="post" novalidate>
+                                                <input type="hidden" name="sub_action" value="update_password">
+                                                <div class="form-group row">
+                                                    <label for="password" class="col-sm-2 col-form-label">Old
+                                                        Password</label>
+                                                    <div class="password col-sm-10">
+                                                        <input type="password" class="form-control" id="password"
+                                                               placeholder="Old password">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputSkills" class="col-sm-2 col-form-label">New
+                                                        Password</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" id="inputSkills"
+                                                               placeholder="New password">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="offset-sm-2 col-sm-10">
+                                                        <button type="submit" class="btn btn-danger">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </fieldset>
+                                    </div>
+                                    <!-- /.tab-pane -->
+                                </div>
+                                <!-- /.tab-content -->
+                            </div><!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
 </div>
 <!-- ./wrapper -->
 

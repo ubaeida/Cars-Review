@@ -107,4 +107,3 @@ class UserService(ServiceBase):
                  f" where id ={userid} "
             c.execute(query1)
         self.db.commit()
-س
