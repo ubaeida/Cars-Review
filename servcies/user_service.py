@@ -4,7 +4,6 @@ from models.User_activity import UserActivity
 from models.Review import Review
 
 
-
 class UserService(ServiceBase):
 
     def register_user(self, username, password, name, email):
@@ -74,23 +73,38 @@ class UserService(ServiceBase):
         c.execute(query)
         out = c.fetchall()
         c.close()
-        profile = []
         for row in out:
-            profile.append(User(_id=row[0], username=row[1], password=row[2], name=row[3], email=row[4]))
-        return profile
+            if row is not None:
+                return User(_id=row[0], username=row[1], password='****', name=row[3], email=row[4])
+        return None
 
     def user_activity(self, user_id):
+        def review_from_row(row):
+            return Review(all_review=row[1], engine_review=row[4], comfort_review=row[5],
+                          fuel_review=row[6], stability_review=row[7], safety_review=row[8],
+                          technology_review=row[9], car_id=row[2], user_id=row[3],
+                          user_comment=row[10], user_name='')
+
         self.connect()
-        query = f'select u.id , r.* , c.name from users u left join ' \
-                f'reviews r on u.id = r.user_id left join cars c on r.car_id = c.id  where user_id = {user_id} '
+        query = f"""select u.id , r.* , c.name from users u left join
+                reviews r on u.id = r.user_id left join cars c on r.car_id = c.id  where user_id = {user_id} """
         c = self.db.cursor()
         c.execute(query)
         out = c.fetchall()
         c.close()
+        activities = map(lambda row: UserActivity(user_id, row[11], review_from_row(row)), out)
+        return activities
+
+    def update_profile(self, username, name, email, password, userid):
+        self.connect()
+        query = f""" SELECT username, password, name, email FROM users where id = {userid} """
+        c = self.db.cursor()
+        c.execute(query)
+        out = c.fetchall()
         print(out)
-        car = map(lambda row: Car(name=row[11], _id='', make='', year='', image='', avg_review=''), out)
-        review = map(lambda row: Review(all_review=row[1], engine_review=row[4], comfort_review=row[5],
-                                        fuel_review=row[6], stability_review=row[7], safety_review=row[8],
-                                        technology_review=row[9], car_id=row[2], user_id=row[3],
-                                        user_comment=row[10], user_name=''), out)
-        return car, review
+        if out is not None:
+            query1 = f" update users set username = {username}, password = {password}, name = {name}, email = {email}" \
+                 f" where id ={userid} "
+            c.execute(query1)
+        self.db.commit()
+س

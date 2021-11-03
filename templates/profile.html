@@ -111,15 +111,15 @@
                         <tbody>
                         {% for activity in user_activities %}
                           <tr>
-                            <td>{{ activity.name }}</td>
-                            <td>{{ activity.all_review }}</td>
-                            <td>{{ activity.engine_review }}</td>
-                            <td>{{ activity.comfort_review }}</td>
-                            <td>{{ activity.fuel_review }}</td>
-                            <td>{{ activity.stability_review }}</td>
-                            <td>{{ activity.safety_review }}</td>
-                            <td>{{ activity.technology_review }}</td>
-                            <td>{{ activity.user_comment }}</td>
+                            <td>{{ activity.car_name }}</td>
+                            <td>{{ activity.review.all_review }}</td>
+                            <td>{{ activity.review.engine_review }}</td>
+                            <td>{{ activity.review.comfort_review }}</td>
+                            <td>{{ activity.review.fuel_review }}</td>
+                            <td>{{ activity.review.stability_review }}</td>
+                            <td>{{ activity.review.safety_review }}</td>
+                            <td>{{ activity.review.technology_review }}</td>
+                            <td>{{ activity.review.user_comment }}</td>
                           </tr>
                         {% endfor %}
                         </tbody>

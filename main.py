@@ -77,7 +77,7 @@ def login():
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
     user_id = session['ID']
-    users = user_service.user_profile(user_id)
+    user = user_service.user_profile(user_id)
     user_activities = user_service.user_activity(user_id)
     form = ProfileUpdate()
     if request.method == 'post':
