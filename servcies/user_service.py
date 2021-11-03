@@ -95,16 +95,14 @@ class UserService(ServiceBase):
         activities = map(lambda row: UserActivity(user_id, row[11], review_from_row(row)), out)
         return activities
 
-    def update_profile(self, username, name, email, password, userid):
+    def update_profile(self, username, name, email, old_password, new_password, user_id):
         self.connect()
-        query = f""" SELECT username, password, name, email FROM users where id = {userid} """
+        query = f""" SELECT username, password, name, email FROM users where id = {user_id} """
         c = self.db.cursor()
         c.execute(query)
         out = c.fetchall()
-        print(out)
-        if out is not None:
-            query1 = f" update users set username = {username}, password = {password}, name = {name}, email = {email}" \
-                 f" where id ={userid} "
+        if out[0][1] == old_password and out is not None:
+            query1 = f""" update users set username= '{username}', name= '{name}', 
+            email= '{email}', password= '{new_password}' where id= {user_id} """
             c.execute(query1)
         self.db.commit()
-س

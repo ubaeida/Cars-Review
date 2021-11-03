@@ -80,12 +80,13 @@ def profile():
     user = user_service.user_profile(user_id)
     user_activities = user_service.user_activity(user_id)
     form = ProfileUpdate()
-    if request.method == 'post':
+    if request.method == 'POST':
         username = request.form.get('username')
         name = request.form.get('name')
         email = request.form.get('email')
-        password = request.form.get('password')
-        user_service.update_profile(username, name, password, email, user_id)
+        old_password = request.form.get('old_password')
+        new_password = request.form.get('new_password')
+        user_service.update_profile(username, name, email, old_password, new_password, user_id)
     return render_template("profile.html", user=user, user_activities=user_activities, form=form)
 
 
