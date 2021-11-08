@@ -9,8 +9,8 @@ from views.ProfileUpdate import ProfileUpdate
 from views.RegisterForm import RegisterForm
 from servcies.attribute_service import AttributeService
 from flask_admin import Admin
-
-
+from servcies.search_service import SearchService
+from views.search_form import SearchForm
 user_service = UserService()
 car_service = CarService()
 ReviewService = ReviewService()
@@ -88,6 +88,17 @@ def profile():
         new_password = request.form.get('new_password')
         user_service.update_profile(username, name, email, old_password, new_password, user_id)
     return render_template("profile.html", user=user, user_activities=user_activities, form=form)
+
+
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    form = SearchForm()
+    if request.method == 'POST':
+        car_make = request.form.get('car_make')
+        car_model = request.form.get('car_model')
+        year = request.form.get('year')
+        SearchService.searching(car_make, car_model, year)
+    return render_template('search.html', form=form)
 
 
 @app.route('/logout')
