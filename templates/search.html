@@ -4,22 +4,22 @@
 <div class="tab-pane" id="settings">
     <form class="form-horizontal" action="search" method="post" novalidate>
         <div class="form-group row">
-            <label for="car_make" class="col-sm-2 col-form-label">Car make</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="car_make" name="car_make" placeholder="Insert car make">
-                </div>
+            <label for="car_name" class="col-sm-2 col-form-label">Car name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="car_name" name="car_name" placeholder="Insert car name">
+            </div>
         </div>
         <div class="form-group row">
             <label for="car_model" class="col-sm-2 col-form-label">Car model</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="car_model" name="car_model" placeholder="Insert car model">
-                </div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="car_model" name="car_model" placeholder="Insert car model">
+            </div>
         </div>
         <div class="form-group row">
             <label for="year" class="col-sm-2 col-form-label">Year</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="year" name="year" placeholder="Insert a year number">
-                </div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="year" name="year" placeholder="Insert a year number">
+            </div>
         </div>
         <div class="form-group row">
             <div class="offset-sm-2 col-sm-10">
@@ -27,5 +27,40 @@
             </div>
         </div>
     </form>
+</div>
+<div class="card-body table-responsive p-0">
+    <table class="table table-hover text-nowrap">
+        <thead>
+        <tr>
+            <th>Car Id</th>
+            <th>Car Make</th>
+            <th>Car Name</th>
+            <th>Year</th>
+            <th>Avg Review</th>
+            <th>Image</th>
+            <th>Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if results is not none %}
+        {% for car in results %}
+        <tr>
+            <td>{{ car.id }}</td>
+            <td>{{ car.make }}</td>
+            <td>{{ car.name }}</td>
+            <td>{{ car.year }}</td>
+            <td>{{ car.avg_review }}</td>
+            <td><img src="{{url_for('static', filename= car.image )}}"
+                     style="width:150px;height:150px;"></td>
+            <td>
+                <input class="detail" type="button"
+                       onclick="location.href='{{ url_for('car_details', car_id=car.id) }}'"
+                       value="Details">
+            </td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}

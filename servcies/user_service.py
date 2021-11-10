@@ -34,7 +34,6 @@ class UserService(ServiceBase):
         c.close()
         for row in out:
             if row is not None:
-                print('searched review')
                 return Review(all_review=row[0], car_id=row[1], user_id=row[2], engine_review=row[3],
                               comfort_review=row[4], fuel_review=row[5],
                               stability_review=row[6], safety_review=row[7], technology_review=row[8], user_name='')

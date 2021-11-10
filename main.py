@@ -15,6 +15,7 @@ user_service = UserService()
 car_service = CarService()
 ReviewService = ReviewService()
 AttributeService = AttributeService()
+search_service = SearchService()
 
 
 class Config(object):
@@ -92,13 +93,15 @@ def profile():
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
+    results = []
     form = SearchForm()
     if request.method == 'POST':
-        car_make = request.form.get('car_make')
+        car_name = request.form.get('car_name')
         car_model = request.form.get('car_model')
         year = request.form.get('year')
-        SearchService.searching(car_make, car_model, year)
-    return render_template('search.html', form=form)
+        results = search_service.searching(car_name, car_model, year)
+    return render_template('search.html', form=form, results=results)
+
 
 
 @app.route('/logout')
